@@ -1,0 +1,1 @@
+protoc -I=H:/dev/pokemon --java_out=H:/dev/pokemon/src/main/java H:/dev/pokemon/src/main/resources/pokemon.proto
