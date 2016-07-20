@@ -149,9 +149,9 @@ public class Service {
                 .setType(106)
                 .setMessage(
                         ByteString.copyFrom(MessageQuad.newBuilder()
-                                .setLat(1L)
-                                .setLong(1L)
-                                .setF1(ByteString.EMPTY)
+                                .setLat(1L) //Need to put the correct value here
+                                .setLong(1L) //Need to put the correct value here
+                                .setF1(ByteString.EMPTY) //Need to put the correct value here
                                 .setF2(ByteString.copyFromUtf8("\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"))
                             .build().toString().getBytes()));
 
@@ -175,9 +175,9 @@ public class Service {
         RequestEnvelop.Builder envelopBuilder = reqBuilder != null ? reqBuilder : RequestEnvelop.newBuilder();
         reqBuilder.setRpcId(1469378659230941192L)
                 .setUnknown1(2)
-                .setLatitude(1L)
-                .setLongitude(1L)
-                .setAltitude(1L)
+                .setLatitude(1L) //Need to put the correct value here
+                .setLongitude(1L) //Need to put the correct value here
+                .setAltitude(1L) //Need to put the correct value here
                 .setUnknown12(989);
         if(auth == null){
            reqBuilder.setAuth(AuthInfo.newBuilder()
@@ -227,8 +227,8 @@ public class Service {
         params.add(new BasicNameValuePair("lt", lt));
         params.add(new BasicNameValuePair("execution", execution));
         params.add(new BasicNameValuePair("_eventId", "submit"));
-        params.add(new BasicNameValuePair("username", "USERNAME"));
-        params.add(new BasicNameValuePair("password", "PASSWORD"));
+        params.add(new BasicNameValuePair("username", "AshMagus"));
+        params.add(new BasicNameValuePair("password", "AaBbCcDd12345"));
         post.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
         HttpResponse loginResponse = httpClient.execute(post);
         String location = loginResponse.getFirstHeader("Location").getValue();
