@@ -15519,29 +15519,34 @@ public final class PokemonProtos {
       boolean getIsInBattle();
 
       /**
-       * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
+       * <code>optional bytes ActivePortModifier = 12;</code>
        *
        * <pre>
-       *unknown ActiveFortModifier = 12;
+       * Might represent the type of item applied to the pokestop, right now only lures can be applied
        * </pre>
        */
-      boolean hasActivePokemon();
+      boolean hasActivePortModifier();
       /**
-       * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
+       * <code>optional bytes ActivePortModifier = 12;</code>
        *
        * <pre>
-       *unknown ActiveFortModifier = 12;
+       * Might represent the type of item applied to the pokestop, right now only lures can be applied
        * </pre>
        */
-      pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto getActivePokemon();
+      com.google.protobuf.ByteString getActivePortModifier();
+
       /**
-       * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
-       *
-       * <pre>
-       *unknown ActiveFortModifier = 12;
-       * </pre>
+       * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
        */
-      pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProtoOrBuilder getActivePokemonOrBuilder();
+      boolean hasLureInfo();
+      /**
+       * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
+       */
+      pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto getLureInfo();
+      /**
+       * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
+       */
+      pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProtoOrBuilder getLureInfoOrBuilder();
 
       /**
        * <code>required int64 CooldownCompleteMs = 14;</code>
@@ -15694,31 +15699,36 @@ public final class PokemonProtos {
                 isInBattle_ = input.readBool();
                 break;
               }
-              case 106: {
-                pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto.Builder subBuilder = null;
-                if (((bitField0_ & 0x00000800) == 0x00000800)) {
-                  subBuilder = activePokemon_.toBuilder();
-                }
-                activePokemon_ = input.readMessage(pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto.PARSER, extensionRegistry);
-                if (subBuilder != null) {
-                  subBuilder.mergeFrom(activePokemon_);
-                  activePokemon_ = subBuilder.buildPartial();
-                }
+              case 98: {
                 bitField0_ |= 0x00000800;
+                activePortModifier_ = input.readBytes();
+                break;
+              }
+              case 106: {
+                pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.Builder subBuilder = null;
+                if (((bitField0_ & 0x00001000) == 0x00001000)) {
+                  subBuilder = lureInfo_.toBuilder();
+                }
+                lureInfo_ = input.readMessage(pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.PARSER, extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(lureInfo_);
+                  lureInfo_ = subBuilder.buildPartial();
+                }
+                bitField0_ |= 0x00001000;
                 break;
               }
               case 112: {
-                bitField0_ |= 0x00001000;
+                bitField0_ |= 0x00002000;
                 cooldownCompleteMs_ = input.readInt64();
                 break;
               }
               case 120: {
-                bitField0_ |= 0x00002000;
+                bitField0_ |= 0x00004000;
                 sponsor_ = input.readInt32();
                 break;
               }
               case 128: {
-                bitField0_ |= 0x00004000;
+                bitField0_ |= 0x00008000;
                 renderingType_ = input.readInt32();
                 break;
               }
@@ -15962,37 +15972,48 @@ public final class PokemonProtos {
         return isInBattle_;
       }
 
-      public static final int ACTIVEPOKEMON_FIELD_NUMBER = 13;
-      private pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto activePokemon_;
+      public static final int ACTIVEPORTMODIFIER_FIELD_NUMBER = 12;
+      private com.google.protobuf.ByteString activePortModifier_;
       /**
-       * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
+       * <code>optional bytes ActivePortModifier = 12;</code>
        *
        * <pre>
-       *unknown ActiveFortModifier = 12;
+       * Might represent the type of item applied to the pokestop, right now only lures can be applied
        * </pre>
        */
-      public boolean hasActivePokemon() {
+      public boolean hasActivePortModifier() {
         return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
-       * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
+       * <code>optional bytes ActivePortModifier = 12;</code>
        *
        * <pre>
-       *unknown ActiveFortModifier = 12;
+       * Might represent the type of item applied to the pokestop, right now only lures can be applied
        * </pre>
        */
-      public pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto getActivePokemon() {
-        return activePokemon_;
+      public com.google.protobuf.ByteString getActivePortModifier() {
+        return activePortModifier_;
+      }
+
+      public static final int LUREINFO_FIELD_NUMBER = 13;
+      private pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto lureInfo_;
+      /**
+       * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
+       */
+      public boolean hasLureInfo() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       /**
-       * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
-       *
-       * <pre>
-       *unknown ActiveFortModifier = 12;
-       * </pre>
+       * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
        */
-      public pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProtoOrBuilder getActivePokemonOrBuilder() {
-        return activePokemon_;
+      public pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto getLureInfo() {
+        return lureInfo_;
+      }
+      /**
+       * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
+       */
+      public pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProtoOrBuilder getLureInfoOrBuilder() {
+        return lureInfo_;
       }
 
       public static final int COOLDOWNCOMPLETEMS_FIELD_NUMBER = 14;
@@ -16001,7 +16022,7 @@ public final class PokemonProtos {
        * <code>required int64 CooldownCompleteMs = 14;</code>
        */
       public boolean hasCooldownCompleteMs() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       /**
        * <code>required int64 CooldownCompleteMs = 14;</code>
@@ -16020,7 +16041,7 @@ public final class PokemonProtos {
        * </pre>
        */
       public boolean hasSponsor() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
+        return ((bitField0_ & 0x00004000) == 0x00004000);
       }
       /**
        * <code>required int32 Sponsor = 15;</code>
@@ -16043,7 +16064,7 @@ public final class PokemonProtos {
        * </pre>
        */
       public boolean hasRenderingType() {
-        return ((bitField0_ & 0x00004000) == 0x00004000);
+        return ((bitField0_ & 0x00008000) == 0x00008000);
       }
       /**
        * <code>optional int32 RenderingType = 16;</code>
@@ -16068,7 +16089,8 @@ public final class PokemonProtos {
         fortType_ = 0;
         gymPoints_ = 0L;
         isInBattle_ = false;
-        activePokemon_ = pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto.getDefaultInstance();
+        activePortModifier_ = com.google.protobuf.ByteString.EMPTY;
+        lureInfo_ = pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.getDefaultInstance();
         cooldownCompleteMs_ = 0L;
         sponsor_ = 0;
         renderingType_ = 0;
@@ -16131,8 +16153,8 @@ public final class PokemonProtos {
           memoizedIsInitialized = 0;
           return false;
         }
-        if (hasActivePokemon()) {
-          if (!getActivePokemon().isInitialized()) {
+        if (hasLureInfo()) {
+          if (!getLureInfo().isInitialized()) {
             memoizedIsInitialized = 0;
             return false;
           }
@@ -16178,15 +16200,18 @@ public final class PokemonProtos {
           output.writeBool(11, isInBattle_);
         }
         if (((bitField0_ & 0x00000800) == 0x00000800)) {
-          output.writeMessage(13, activePokemon_);
+          output.writeBytes(12, activePortModifier_);
         }
         if (((bitField0_ & 0x00001000) == 0x00001000)) {
-          output.writeInt64(14, cooldownCompleteMs_);
+          output.writeMessage(13, lureInfo_);
         }
         if (((bitField0_ & 0x00002000) == 0x00002000)) {
-          output.writeInt32(15, sponsor_);
+          output.writeInt64(14, cooldownCompleteMs_);
         }
         if (((bitField0_ & 0x00004000) == 0x00004000)) {
+          output.writeInt32(15, sponsor_);
+        }
+        if (((bitField0_ & 0x00008000) == 0x00008000)) {
           output.writeInt32(16, renderingType_);
         }
         getUnknownFields().writeTo(output);
@@ -16244,17 +16269,21 @@ public final class PokemonProtos {
         }
         if (((bitField0_ & 0x00000800) == 0x00000800)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(13, activePokemon_);
+            .computeBytesSize(12, activePortModifier_);
         }
         if (((bitField0_ & 0x00001000) == 0x00001000)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt64Size(14, cooldownCompleteMs_);
+            .computeMessageSize(13, lureInfo_);
         }
         if (((bitField0_ & 0x00002000) == 0x00002000)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(15, sponsor_);
+            .computeInt64Size(14, cooldownCompleteMs_);
         }
         if (((bitField0_ & 0x00004000) == 0x00004000)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(15, sponsor_);
+        }
+        if (((bitField0_ & 0x00008000) == 0x00008000)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(16, renderingType_);
         }
@@ -16367,7 +16396,7 @@ public final class PokemonProtos {
         }
         private void maybeForceBuilderInitialization() {
           if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-            getActivePokemonFieldBuilder();
+            getLureInfoFieldBuilder();
           }
         }
         private static Builder create() {
@@ -16398,18 +16427,20 @@ public final class PokemonProtos {
           bitField0_ = (bitField0_ & ~0x00000200);
           isInBattle_ = false;
           bitField0_ = (bitField0_ & ~0x00000400);
-          if (activePokemonBuilder_ == null) {
-            activePokemon_ = pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto.getDefaultInstance();
-          } else {
-            activePokemonBuilder_.clear();
-          }
+          activePortModifier_ = com.google.protobuf.ByteString.EMPTY;
           bitField0_ = (bitField0_ & ~0x00000800);
-          cooldownCompleteMs_ = 0L;
+          if (lureInfoBuilder_ == null) {
+            lureInfo_ = pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.getDefaultInstance();
+          } else {
+            lureInfoBuilder_.clear();
+          }
           bitField0_ = (bitField0_ & ~0x00001000);
-          sponsor_ = 0;
+          cooldownCompleteMs_ = 0L;
           bitField0_ = (bitField0_ & ~0x00002000);
-          renderingType_ = 0;
+          sponsor_ = 0;
           bitField0_ = (bitField0_ & ~0x00004000);
+          renderingType_ = 0;
+          bitField0_ = (bitField0_ & ~0x00008000);
           return this;
         }
 
@@ -16485,21 +16516,25 @@ public final class PokemonProtos {
           if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
             to_bitField0_ |= 0x00000800;
           }
-          if (activePokemonBuilder_ == null) {
-            result.activePokemon_ = activePokemon_;
-          } else {
-            result.activePokemon_ = activePokemonBuilder_.build();
-          }
+          result.activePortModifier_ = activePortModifier_;
           if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
             to_bitField0_ |= 0x00001000;
           }
-          result.cooldownCompleteMs_ = cooldownCompleteMs_;
+          if (lureInfoBuilder_ == null) {
+            result.lureInfo_ = lureInfo_;
+          } else {
+            result.lureInfo_ = lureInfoBuilder_.build();
+          }
           if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
             to_bitField0_ |= 0x00002000;
           }
-          result.sponsor_ = sponsor_;
+          result.cooldownCompleteMs_ = cooldownCompleteMs_;
           if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
             to_bitField0_ |= 0x00004000;
+          }
+          result.sponsor_ = sponsor_;
+          if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
+            to_bitField0_ |= 0x00008000;
           }
           result.renderingType_ = renderingType_;
           result.bitField0_ = to_bitField0_;
@@ -16553,8 +16588,11 @@ public final class PokemonProtos {
           if (other.hasIsInBattle()) {
             setIsInBattle(other.getIsInBattle());
           }
-          if (other.hasActivePokemon()) {
-            mergeActivePokemon(other.getActivePokemon());
+          if (other.hasActivePortModifier()) {
+            setActivePortModifier(other.getActivePortModifier());
+          }
+          if (other.hasLureInfo()) {
+            mergeLureInfo(other.getLureInfo());
           }
           if (other.hasCooldownCompleteMs()) {
             setCooldownCompleteMs(other.getCooldownCompleteMs());
@@ -16622,8 +16660,8 @@ public final class PokemonProtos {
             
             return false;
           }
-          if (hasActivePokemon()) {
-            if (!getActivePokemon().isInitialized()) {
+          if (hasLureInfo()) {
+            if (!getLureInfo().isInitialized()) {
               
               return false;
             }
@@ -17062,156 +17100,171 @@ public final class PokemonProtos {
           return this;
         }
 
-        private pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto activePokemon_ = pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto.getDefaultInstance();
-        private com.google.protobuf.SingleFieldBuilder<
-            pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto, pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto.Builder, pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProtoOrBuilder> activePokemonBuilder_;
+        private com.google.protobuf.ByteString activePortModifier_ = com.google.protobuf.ByteString.EMPTY;
         /**
-         * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
+         * <code>optional bytes ActivePortModifier = 12;</code>
          *
          * <pre>
-         *unknown ActiveFortModifier = 12;
+         * Might represent the type of item applied to the pokestop, right now only lures can be applied
          * </pre>
          */
-        public boolean hasActivePokemon() {
+        public boolean hasActivePortModifier() {
           return ((bitField0_ & 0x00000800) == 0x00000800);
         }
         /**
-         * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
+         * <code>optional bytes ActivePortModifier = 12;</code>
          *
          * <pre>
-         *unknown ActiveFortModifier = 12;
+         * Might represent the type of item applied to the pokestop, right now only lures can be applied
          * </pre>
          */
-        public pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto getActivePokemon() {
-          if (activePokemonBuilder_ == null) {
-            return activePokemon_;
+        public com.google.protobuf.ByteString getActivePortModifier() {
+          return activePortModifier_;
+        }
+        /**
+         * <code>optional bytes ActivePortModifier = 12;</code>
+         *
+         * <pre>
+         * Might represent the type of item applied to the pokestop, right now only lures can be applied
+         * </pre>
+         */
+        public Builder setActivePortModifier(com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000800;
+          activePortModifier_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional bytes ActivePortModifier = 12;</code>
+         *
+         * <pre>
+         * Might represent the type of item applied to the pokestop, right now only lures can be applied
+         * </pre>
+         */
+        public Builder clearActivePortModifier() {
+          bitField0_ = (bitField0_ & ~0x00000800);
+          activePortModifier_ = getDefaultInstance().getActivePortModifier();
+          onChanged();
+          return this;
+        }
+
+        private pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto lureInfo_ = pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.getDefaultInstance();
+        private com.google.protobuf.SingleFieldBuilder<
+            pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto, pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.Builder, pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProtoOrBuilder> lureInfoBuilder_;
+        /**
+         * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
+         */
+        public boolean hasLureInfo() {
+          return ((bitField0_ & 0x00001000) == 0x00001000);
+        }
+        /**
+         * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
+         */
+        public pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto getLureInfo() {
+          if (lureInfoBuilder_ == null) {
+            return lureInfo_;
           } else {
-            return activePokemonBuilder_.getMessage();
+            return lureInfoBuilder_.getMessage();
           }
         }
         /**
-         * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
-         *
-         * <pre>
-         *unknown ActiveFortModifier = 12;
-         * </pre>
+         * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
          */
-        public Builder setActivePokemon(pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto value) {
-          if (activePokemonBuilder_ == null) {
+        public Builder setLureInfo(pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto value) {
+          if (lureInfoBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
             }
-            activePokemon_ = value;
+            lureInfo_ = value;
             onChanged();
           } else {
-            activePokemonBuilder_.setMessage(value);
+            lureInfoBuilder_.setMessage(value);
           }
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00001000;
           return this;
         }
         /**
-         * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
-         *
-         * <pre>
-         *unknown ActiveFortModifier = 12;
-         * </pre>
+         * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
          */
-        public Builder setActivePokemon(
-            pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto.Builder builderForValue) {
-          if (activePokemonBuilder_ == null) {
-            activePokemon_ = builderForValue.build();
+        public Builder setLureInfo(
+            pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.Builder builderForValue) {
+          if (lureInfoBuilder_ == null) {
+            lureInfo_ = builderForValue.build();
             onChanged();
           } else {
-            activePokemonBuilder_.setMessage(builderForValue.build());
+            lureInfoBuilder_.setMessage(builderForValue.build());
           }
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00001000;
           return this;
         }
         /**
-         * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
-         *
-         * <pre>
-         *unknown ActiveFortModifier = 12;
-         * </pre>
+         * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
          */
-        public Builder mergeActivePokemon(pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto value) {
-          if (activePokemonBuilder_ == null) {
-            if (((bitField0_ & 0x00000800) == 0x00000800) &&
-                activePokemon_ != pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto.getDefaultInstance()) {
-              activePokemon_ =
-                pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto.newBuilder(activePokemon_).mergeFrom(value).buildPartial();
+        public Builder mergeLureInfo(pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto value) {
+          if (lureInfoBuilder_ == null) {
+            if (((bitField0_ & 0x00001000) == 0x00001000) &&
+                lureInfo_ != pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.getDefaultInstance()) {
+              lureInfo_ =
+                pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.newBuilder(lureInfo_).mergeFrom(value).buildPartial();
             } else {
-              activePokemon_ = value;
+              lureInfo_ = value;
             }
             onChanged();
           } else {
-            activePokemonBuilder_.mergeFrom(value);
+            lureInfoBuilder_.mergeFrom(value);
           }
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00001000;
           return this;
         }
         /**
-         * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
-         *
-         * <pre>
-         *unknown ActiveFortModifier = 12;
-         * </pre>
+         * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
          */
-        public Builder clearActivePokemon() {
-          if (activePokemonBuilder_ == null) {
-            activePokemon_ = pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto.getDefaultInstance();
+        public Builder clearLureInfo() {
+          if (lureInfoBuilder_ == null) {
+            lureInfo_ = pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.getDefaultInstance();
             onChanged();
           } else {
-            activePokemonBuilder_.clear();
+            lureInfoBuilder_.clear();
           }
-          bitField0_ = (bitField0_ & ~0x00000800);
+          bitField0_ = (bitField0_ & ~0x00001000);
           return this;
         }
         /**
-         * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
-         *
-         * <pre>
-         *unknown ActiveFortModifier = 12;
-         * </pre>
+         * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
          */
-        public pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto.Builder getActivePokemonBuilder() {
-          bitField0_ |= 0x00000800;
+        public pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.Builder getLureInfoBuilder() {
+          bitField0_ |= 0x00001000;
           onChanged();
-          return getActivePokemonFieldBuilder().getBuilder();
+          return getLureInfoFieldBuilder().getBuilder();
         }
         /**
-         * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
-         *
-         * <pre>
-         *unknown ActiveFortModifier = 12;
-         * </pre>
+         * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
          */
-        public pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProtoOrBuilder getActivePokemonOrBuilder() {
-          if (activePokemonBuilder_ != null) {
-            return activePokemonBuilder_.getMessageOrBuilder();
+        public pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProtoOrBuilder getLureInfoOrBuilder() {
+          if (lureInfoBuilder_ != null) {
+            return lureInfoBuilder_.getMessageOrBuilder();
           } else {
-            return activePokemon_;
+            return lureInfo_;
           }
         }
         /**
-         * <code>optional .protobuf.ResponseEnvelop.MapPokemonProto ActivePokemon = 13;</code>
-         *
-         * <pre>
-         *unknown ActiveFortModifier = 12;
-         * </pre>
+         * <code>optional .protobuf.ResponseEnvelop.FortLureInfoProto LureInfo = 13;</code>
          */
         private com.google.protobuf.SingleFieldBuilder<
-            pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto, pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto.Builder, pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProtoOrBuilder> 
-            getActivePokemonFieldBuilder() {
-          if (activePokemonBuilder_ == null) {
-            activePokemonBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-                pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto, pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProto.Builder, pokemon.protobuf.PokemonProtos.ResponseEnvelop.MapPokemonProtoOrBuilder>(
-                    getActivePokemon(),
+            pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto, pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.Builder, pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProtoOrBuilder> 
+            getLureInfoFieldBuilder() {
+          if (lureInfoBuilder_ == null) {
+            lureInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto, pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.Builder, pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProtoOrBuilder>(
+                    getLureInfo(),
                     getParentForChildren(),
                     isClean());
-            activePokemon_ = null;
+            lureInfo_ = null;
           }
-          return activePokemonBuilder_;
+          return lureInfoBuilder_;
         }
 
         private long cooldownCompleteMs_ ;
@@ -17219,7 +17272,7 @@ public final class PokemonProtos {
          * <code>required int64 CooldownCompleteMs = 14;</code>
          */
         public boolean hasCooldownCompleteMs() {
-          return ((bitField0_ & 0x00001000) == 0x00001000);
+          return ((bitField0_ & 0x00002000) == 0x00002000);
         }
         /**
          * <code>required int64 CooldownCompleteMs = 14;</code>
@@ -17231,7 +17284,7 @@ public final class PokemonProtos {
          * <code>required int64 CooldownCompleteMs = 14;</code>
          */
         public Builder setCooldownCompleteMs(long value) {
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00002000;
           cooldownCompleteMs_ = value;
           onChanged();
           return this;
@@ -17240,7 +17293,7 @@ public final class PokemonProtos {
          * <code>required int64 CooldownCompleteMs = 14;</code>
          */
         public Builder clearCooldownCompleteMs() {
-          bitField0_ = (bitField0_ & ~0x00001000);
+          bitField0_ = (bitField0_ & ~0x00002000);
           cooldownCompleteMs_ = 0L;
           onChanged();
           return this;
@@ -17255,7 +17308,7 @@ public final class PokemonProtos {
          * </pre>
          */
         public boolean hasSponsor() {
-          return ((bitField0_ & 0x00002000) == 0x00002000);
+          return ((bitField0_ & 0x00004000) == 0x00004000);
         }
         /**
          * <code>required int32 Sponsor = 15;</code>
@@ -17275,7 +17328,7 @@ public final class PokemonProtos {
          * </pre>
          */
         public Builder setSponsor(int value) {
-          bitField0_ |= 0x00002000;
+          bitField0_ |= 0x00004000;
           sponsor_ = value;
           onChanged();
           return this;
@@ -17288,7 +17341,7 @@ public final class PokemonProtos {
          * </pre>
          */
         public Builder clearSponsor() {
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00004000);
           sponsor_ = 0;
           onChanged();
           return this;
@@ -17303,7 +17356,7 @@ public final class PokemonProtos {
          * </pre>
          */
         public boolean hasRenderingType() {
-          return ((bitField0_ & 0x00004000) == 0x00004000);
+          return ((bitField0_ & 0x00008000) == 0x00008000);
         }
         /**
          * <code>optional int32 RenderingType = 16;</code>
@@ -17323,7 +17376,7 @@ public final class PokemonProtos {
          * </pre>
          */
         public Builder setRenderingType(int value) {
-          bitField0_ |= 0x00004000;
+          bitField0_ |= 0x00008000;
           renderingType_ = value;
           onChanged();
           return this;
@@ -17336,7 +17389,7 @@ public final class PokemonProtos {
          * </pre>
          */
         public Builder clearRenderingType() {
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
           renderingType_ = 0;
           onChanged();
           return this;
@@ -17351,6 +17404,913 @@ public final class PokemonProtos {
       }
 
       // @@protoc_insertion_point(class_scope:protobuf.ResponseEnvelop.PokemonFortProto)
+    }
+
+    public interface FortLureInfoProtoOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:protobuf.ResponseEnvelop.FortLureInfoProto)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>required string FortId = 1;</code>
+       */
+      boolean hasFortId();
+      /**
+       * <code>required string FortId = 1;</code>
+       */
+      java.lang.String getFortId();
+      /**
+       * <code>required string FortId = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getFortIdBytes();
+
+      /**
+       * <code>required double unknown2 = 2;</code>
+       */
+      boolean hasUnknown2();
+      /**
+       * <code>required double unknown2 = 2;</code>
+       */
+      double getUnknown2();
+
+      /**
+       * <code>required int32 ActivePokemonId = 3;</code>
+       */
+      boolean hasActivePokemonId();
+      /**
+       * <code>required int32 ActivePokemonId = 3;</code>
+       */
+      int getActivePokemonId();
+
+      /**
+       * <code>required int64 LureExpiresTimestampMs = 4;</code>
+       */
+      boolean hasLureExpiresTimestampMs();
+      /**
+       * <code>required int64 LureExpiresTimestampMs = 4;</code>
+       */
+      long getLureExpiresTimestampMs();
+
+      /**
+       * <code>required string DeployerPlayerCodename = 5;</code>
+       */
+      boolean hasDeployerPlayerCodename();
+      /**
+       * <code>required string DeployerPlayerCodename = 5;</code>
+       */
+      java.lang.String getDeployerPlayerCodename();
+      /**
+       * <code>required string DeployerPlayerCodename = 5;</code>
+       */
+      com.google.protobuf.ByteString
+          getDeployerPlayerCodenameBytes();
+    }
+    /**
+     * Protobuf type {@code protobuf.ResponseEnvelop.FortLureInfoProto}
+     */
+    public static final class FortLureInfoProto extends
+        com.google.protobuf.GeneratedMessage implements
+        // @@protoc_insertion_point(message_implements:protobuf.ResponseEnvelop.FortLureInfoProto)
+        FortLureInfoProtoOrBuilder {
+      // Use FortLureInfoProto.newBuilder() to construct.
+      private FortLureInfoProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private FortLureInfoProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final FortLureInfoProto defaultInstance;
+      public static FortLureInfoProto getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public FortLureInfoProto getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private FortLureInfoProto(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                com.google.protobuf.ByteString bs = input.readBytes();
+                bitField0_ |= 0x00000001;
+                fortId_ = bs;
+                break;
+              }
+              case 17: {
+                bitField0_ |= 0x00000002;
+                unknown2_ = input.readDouble();
+                break;
+              }
+              case 24: {
+                bitField0_ |= 0x00000004;
+                activePokemonId_ = input.readInt32();
+                break;
+              }
+              case 32: {
+                bitField0_ |= 0x00000008;
+                lureExpiresTimestampMs_ = input.readInt64();
+                break;
+              }
+              case 42: {
+                com.google.protobuf.ByteString bs = input.readBytes();
+                bitField0_ |= 0x00000010;
+                deployerPlayerCodename_ = bs;
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return pokemon.protobuf.PokemonProtos.internal_static_protobuf_ResponseEnvelop_FortLureInfoProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return pokemon.protobuf.PokemonProtos.internal_static_protobuf_ResponseEnvelop_FortLureInfoProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.class, pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<FortLureInfoProto> PARSER =
+          new com.google.protobuf.AbstractParser<FortLureInfoProto>() {
+        public FortLureInfoProto parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new FortLureInfoProto(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<FortLureInfoProto> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      public static final int FORTID_FIELD_NUMBER = 1;
+      private java.lang.Object fortId_;
+      /**
+       * <code>required string FortId = 1;</code>
+       */
+      public boolean hasFortId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string FortId = 1;</code>
+       */
+      public java.lang.String getFortId() {
+        java.lang.Object ref = fortId_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            fortId_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>required string FortId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFortIdBytes() {
+        java.lang.Object ref = fortId_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fortId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int UNKNOWN2_FIELD_NUMBER = 2;
+      private double unknown2_;
+      /**
+       * <code>required double unknown2 = 2;</code>
+       */
+      public boolean hasUnknown2() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required double unknown2 = 2;</code>
+       */
+      public double getUnknown2() {
+        return unknown2_;
+      }
+
+      public static final int ACTIVEPOKEMONID_FIELD_NUMBER = 3;
+      private int activePokemonId_;
+      /**
+       * <code>required int32 ActivePokemonId = 3;</code>
+       */
+      public boolean hasActivePokemonId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 ActivePokemonId = 3;</code>
+       */
+      public int getActivePokemonId() {
+        return activePokemonId_;
+      }
+
+      public static final int LUREEXPIRESTIMESTAMPMS_FIELD_NUMBER = 4;
+      private long lureExpiresTimestampMs_;
+      /**
+       * <code>required int64 LureExpiresTimestampMs = 4;</code>
+       */
+      public boolean hasLureExpiresTimestampMs() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required int64 LureExpiresTimestampMs = 4;</code>
+       */
+      public long getLureExpiresTimestampMs() {
+        return lureExpiresTimestampMs_;
+      }
+
+      public static final int DEPLOYERPLAYERCODENAME_FIELD_NUMBER = 5;
+      private java.lang.Object deployerPlayerCodename_;
+      /**
+       * <code>required string DeployerPlayerCodename = 5;</code>
+       */
+      public boolean hasDeployerPlayerCodename() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required string DeployerPlayerCodename = 5;</code>
+       */
+      public java.lang.String getDeployerPlayerCodename() {
+        java.lang.Object ref = deployerPlayerCodename_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            deployerPlayerCodename_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>required string DeployerPlayerCodename = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDeployerPlayerCodenameBytes() {
+        java.lang.Object ref = deployerPlayerCodename_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          deployerPlayerCodename_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      private void initFields() {
+        fortId_ = "";
+        unknown2_ = 0D;
+        activePokemonId_ = 0;
+        lureExpiresTimestampMs_ = 0L;
+        deployerPlayerCodename_ = "";
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        if (!hasFortId()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasUnknown2()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasActivePokemonId()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasLureExpiresTimestampMs()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasDeployerPlayerCodename()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getFortIdBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeDouble(2, unknown2_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeInt32(3, activePokemonId_);
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          output.writeInt64(4, lureExpiresTimestampMs_);
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          output.writeBytes(5, getDeployerPlayerCodenameBytes());
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getFortIdBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeDoubleSize(2, unknown2_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(3, activePokemonId_);
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(4, lureExpiresTimestampMs_);
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(5, getDeployerPlayerCodenameBytes());
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code protobuf.ResponseEnvelop.FortLureInfoProto}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:protobuf.ResponseEnvelop.FortLureInfoProto)
+          pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProtoOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return pokemon.protobuf.PokemonProtos.internal_static_protobuf_ResponseEnvelop_FortLureInfoProto_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return pokemon.protobuf.PokemonProtos.internal_static_protobuf_ResponseEnvelop_FortLureInfoProto_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.class, pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.Builder.class);
+        }
+
+        // Construct using pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          fortId_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          unknown2_ = 0D;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          activePokemonId_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          lureExpiresTimestampMs_ = 0L;
+          bitField0_ = (bitField0_ & ~0x00000008);
+          deployerPlayerCodename_ = "";
+          bitField0_ = (bitField0_ & ~0x00000010);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return pokemon.protobuf.PokemonProtos.internal_static_protobuf_ResponseEnvelop_FortLureInfoProto_descriptor;
+        }
+
+        public pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto getDefaultInstanceForType() {
+          return pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.getDefaultInstance();
+        }
+
+        public pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto build() {
+          pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto buildPartial() {
+          pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto result = new pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.fortId_ = fortId_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.unknown2_ = unknown2_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.activePokemonId_ = activePokemonId_;
+          if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+            to_bitField0_ |= 0x00000008;
+          }
+          result.lureExpiresTimestampMs_ = lureExpiresTimestampMs_;
+          if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+            to_bitField0_ |= 0x00000010;
+          }
+          result.deployerPlayerCodename_ = deployerPlayerCodename_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto) {
+            return mergeFrom((pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto other) {
+          if (other == pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto.getDefaultInstance()) return this;
+          if (other.hasFortId()) {
+            bitField0_ |= 0x00000001;
+            fortId_ = other.fortId_;
+            onChanged();
+          }
+          if (other.hasUnknown2()) {
+            setUnknown2(other.getUnknown2());
+          }
+          if (other.hasActivePokemonId()) {
+            setActivePokemonId(other.getActivePokemonId());
+          }
+          if (other.hasLureExpiresTimestampMs()) {
+            setLureExpiresTimestampMs(other.getLureExpiresTimestampMs());
+          }
+          if (other.hasDeployerPlayerCodename()) {
+            bitField0_ |= 0x00000010;
+            deployerPlayerCodename_ = other.deployerPlayerCodename_;
+            onChanged();
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          if (!hasFortId()) {
+            
+            return false;
+          }
+          if (!hasUnknown2()) {
+            
+            return false;
+          }
+          if (!hasActivePokemonId()) {
+            
+            return false;
+          }
+          if (!hasLureExpiresTimestampMs()) {
+            
+            return false;
+          }
+          if (!hasDeployerPlayerCodename()) {
+            
+            return false;
+          }
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (pokemon.protobuf.PokemonProtos.ResponseEnvelop.FortLureInfoProto) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        private java.lang.Object fortId_ = "";
+        /**
+         * <code>required string FortId = 1;</code>
+         */
+        public boolean hasFortId() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>required string FortId = 1;</code>
+         */
+        public java.lang.String getFortId() {
+          java.lang.Object ref = fortId_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              fortId_ = s;
+            }
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>required string FortId = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getFortIdBytes() {
+          java.lang.Object ref = fortId_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            fortId_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>required string FortId = 1;</code>
+         */
+        public Builder setFortId(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          fortId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string FortId = 1;</code>
+         */
+        public Builder clearFortId() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          fortId_ = getDefaultInstance().getFortId();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string FortId = 1;</code>
+         */
+        public Builder setFortIdBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          fortId_ = value;
+          onChanged();
+          return this;
+        }
+
+        private double unknown2_ ;
+        /**
+         * <code>required double unknown2 = 2;</code>
+         */
+        public boolean hasUnknown2() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>required double unknown2 = 2;</code>
+         */
+        public double getUnknown2() {
+          return unknown2_;
+        }
+        /**
+         * <code>required double unknown2 = 2;</code>
+         */
+        public Builder setUnknown2(double value) {
+          bitField0_ |= 0x00000002;
+          unknown2_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required double unknown2 = 2;</code>
+         */
+        public Builder clearUnknown2() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          unknown2_ = 0D;
+          onChanged();
+          return this;
+        }
+
+        private int activePokemonId_ ;
+        /**
+         * <code>required int32 ActivePokemonId = 3;</code>
+         */
+        public boolean hasActivePokemonId() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>required int32 ActivePokemonId = 3;</code>
+         */
+        public int getActivePokemonId() {
+          return activePokemonId_;
+        }
+        /**
+         * <code>required int32 ActivePokemonId = 3;</code>
+         */
+        public Builder setActivePokemonId(int value) {
+          bitField0_ |= 0x00000004;
+          activePokemonId_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required int32 ActivePokemonId = 3;</code>
+         */
+        public Builder clearActivePokemonId() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          activePokemonId_ = 0;
+          onChanged();
+          return this;
+        }
+
+        private long lureExpiresTimestampMs_ ;
+        /**
+         * <code>required int64 LureExpiresTimestampMs = 4;</code>
+         */
+        public boolean hasLureExpiresTimestampMs() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        /**
+         * <code>required int64 LureExpiresTimestampMs = 4;</code>
+         */
+        public long getLureExpiresTimestampMs() {
+          return lureExpiresTimestampMs_;
+        }
+        /**
+         * <code>required int64 LureExpiresTimestampMs = 4;</code>
+         */
+        public Builder setLureExpiresTimestampMs(long value) {
+          bitField0_ |= 0x00000008;
+          lureExpiresTimestampMs_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required int64 LureExpiresTimestampMs = 4;</code>
+         */
+        public Builder clearLureExpiresTimestampMs() {
+          bitField0_ = (bitField0_ & ~0x00000008);
+          lureExpiresTimestampMs_ = 0L;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object deployerPlayerCodename_ = "";
+        /**
+         * <code>required string DeployerPlayerCodename = 5;</code>
+         */
+        public boolean hasDeployerPlayerCodename() {
+          return ((bitField0_ & 0x00000010) == 0x00000010);
+        }
+        /**
+         * <code>required string DeployerPlayerCodename = 5;</code>
+         */
+        public java.lang.String getDeployerPlayerCodename() {
+          java.lang.Object ref = deployerPlayerCodename_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              deployerPlayerCodename_ = s;
+            }
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>required string DeployerPlayerCodename = 5;</code>
+         */
+        public com.google.protobuf.ByteString
+            getDeployerPlayerCodenameBytes() {
+          java.lang.Object ref = deployerPlayerCodename_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            deployerPlayerCodename_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>required string DeployerPlayerCodename = 5;</code>
+         */
+        public Builder setDeployerPlayerCodename(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+          deployerPlayerCodename_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string DeployerPlayerCodename = 5;</code>
+         */
+        public Builder clearDeployerPlayerCodename() {
+          bitField0_ = (bitField0_ & ~0x00000010);
+          deployerPlayerCodename_ = getDefaultInstance().getDeployerPlayerCodename();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string DeployerPlayerCodename = 5;</code>
+         */
+        public Builder setDeployerPlayerCodenameBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+          deployerPlayerCodename_ = value;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:protobuf.ResponseEnvelop.FortLureInfoProto)
+      }
+
+      static {
+        defaultInstance = new FortLureInfoProto(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:protobuf.ResponseEnvelop.FortLureInfoProto)
     }
 
     public interface PokemonSummaryFortProtoOrBuilder extends
@@ -25797,6 +26757,11 @@ public final class PokemonProtos {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_protobuf_ResponseEnvelop_PokemonFortProto_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_protobuf_ResponseEnvelop_FortLureInfoProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_protobuf_ResponseEnvelop_FortLureInfoProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_protobuf_ResponseEnvelop_PokemonSummaryFortProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -25880,7 +26845,7 @@ public final class PokemonProtos {
       "p.AuthInfo.JWT\032*\n\003JWT\022\020\n\010contents\030\001 \002(\t\022" +
       "\021\n\tunknown13\030\002 \002(\005\"F\n\013UnknownAuth\022\021\n\tunk" +
       "nown71\030\001 \001(\014\022\021\n\tunknown72\030\002 \001(\003\022\021\n\tunkno" +
-      "wn73\030\003 \001(\014\"\320\025\n\017ResponseEnvelop\022\020\n\010unknow" +
+      "wn73\030\003 \001(\014\"\372\026\n\017ResponseEnvelop\022\020\n\010unknow" +
       "n1\030\001 \002(\005\022\020\n\010unknown2\030\002 \001(\003\022\017\n\007api_url\030\003 " +
       "\001(\t\0224\n\010unknown6\030\006 \001(\0132\".protobuf.Respons" +
       "eEnvelop.Unknown6\022\'\n\010unknown7\030\007 \001(\0132\025.pr" +
@@ -25910,47 +26875,51 @@ public final class PokemonProtos {
       "roto\022\024\n\014SpawnpointId\030\001 \002(\t\022\023\n\013EncounterI" +
       "d\030\002 \002(\004\022\025\n\rPokedexTypeId\030\003 \002(\005\022\030\n\020Expira" +
       "tionTimeMs\030\004 \002(\003\022\020\n\010Latitude\030\005 \002(\001\022\021\n\tLo" +
-      "ngitude\030\006 \002(\001\032\360\002\n\020PokemonFortProto\022\016\n\006Fo" +
+      "ngitude\030\006 \002(\001\032\211\003\n\020PokemonFortProto\022\016\n\006Fo" +
       "rtId\030\001 \002(\t\022\026\n\016LastModifiedMs\030\002 \002(\003\022\020\n\010La" +
       "titude\030\003 \002(\001\022\021\n\tLongitude\030\004 \002(\001\022\014\n\004Team\030" +
       "\005 \002(\005\022\026\n\016GuardPokemonId\030\006 \002(\005\022\031\n\021GuardPo" +
       "kemonLevel\030\007 \002(\005\022\017\n\007Enabled\030\010 \002(\010\022\020\n\010For",
       "tType\030\t \002(\005\022\021\n\tGymPoints\030\n \002(\003\022\022\n\nIsInBa" +
-      "ttle\030\013 \002(\010\022@\n\rActivePokemon\030\r \001(\0132).prot" +
-      "obuf.ResponseEnvelop.MapPokemonProto\022\032\n\022" +
-      "CooldownCompleteMs\030\016 \002(\003\022\017\n\007Sponsor\030\017 \002(" +
-      "\005\022\025\n\rRenderingType\030\020 \001(\005\032m\n\027PokemonSumma" +
-      "ryFortProto\022\025\n\rFortSummaryId\030\001 \002(\t\022\026\n\016La" +
-      "stModifiedMs\030\002 \002(\003\022\020\n\010Latitude\030\003 \002(\001\022\021\n\t" +
-      "Longitude\030\004 \002(\001\032<\n\025ClientSpawnPointProto" +
-      "\022\020\n\010Latitude\030\002 \002(\001\022\021\n\tLongitude\030\003 \002(\001\032\203\002" +
-      "\n\020WildPokemonProto\022\023\n\013EncounterId\030\001 \001(\004\022",
-      "\026\n\016LastModifiedMs\030\002 \001(\003\022\020\n\010Latitude\030\003 \001(" +
-      "\001\022\021\n\tLongitude\030\004 \001(\001\022\024\n\014SpawnPointId\030\005 \001" +
-      "(\t\022C\n\007pokemon\030\007 \001(\01322.protobuf.ResponseE" +
-      "nvelop.WildPokemonProto.Pokemon\022\030\n\020TimeT" +
-      "illHiddenMs\030\013 \001(\005\032(\n\007Pokemon\022\n\n\002Id\030\001 \001(\004" +
-      "\022\021\n\tPokemonId\030\002 \001(\005\032X\n\022NearbyPokemonProt" +
-      "o\022\025\n\rPokedexNumber\030\001 \001(\005\022\026\n\016DistanceMete" +
-      "rs\030\002 \001(\002\022\023\n\013EncounterId\030\003 \001(\004\032V\n\016Profile" +
-      "Payload\022\020\n\010unknown1\030\001 \002(\005\0222\n\007profile\030\002 \001" +
-      "(\0132!.protobuf.ResponseEnvelop.Profile\032\305\004",
-      "\n\007Profile\022\025\n\rcreation_time\030\001 \002(\003\022\020\n\010user" +
-      "name\030\002 \001(\t\022\014\n\004team\030\005 \001(\005\022\020\n\010tutorial\030\007 \001" +
-      "(\014\022?\n\006avatar\030\010 \001(\0132/.protobuf.ResponseEn" +
-      "velop.Profile.AvatarDetails\022\024\n\014poke_stor" +
-      "age\030\t \001(\005\022\024\n\014item_storage\030\n \001(\005\022A\n\013daily" +
-      "_bonus\030\013 \001(\0132,.protobuf.ResponseEnvelop." +
-      "Profile.DailyBonus\022\021\n\tunknown12\030\014 \001(\014\022\021\n" +
-      "\tunknown13\030\r \001(\014\022<\n\010currency\030\016 \003(\0132*.pro" +
-      "tobuf.ResponseEnvelop.Profile.Currency\032X" +
-      "\n\rAvatarDetails\022\020\n\010unknown2\030\002 \001(\005\022\020\n\010unk",
-      "nown3\030\003 \001(\005\022\020\n\010unknown9\030\t \001(\005\022\021\n\tunknown" +
-      "10\030\n \001(\005\032Y\n\nDailyBonus\022\036\n\026NextCollectTim" +
-      "estampMs\030\001 \001(\003\022+\n#NextDefenderBonusColle" +
-      "ctTimestampMs\030\002 \001(\003\032(\n\010Currency\022\014\n\004type\030" +
-      "\001 \002(\t\022\016\n\006amount\030\002 \001(\005B!\n\020pokemon.protobu" +
-      "fB\rPokemonProtos"
+      "ttle\030\013 \002(\010\022\032\n\022ActivePortModifier\030\014 \001(\014\022=" +
+      "\n\010LureInfo\030\r \001(\0132+.protobuf.ResponseEnve" +
+      "lop.FortLureInfoProto\022\032\n\022CooldownComplet" +
+      "eMs\030\016 \002(\003\022\017\n\007Sponsor\030\017 \002(\005\022\025\n\rRenderingT" +
+      "ype\030\020 \001(\005\032\216\001\n\021FortLureInfoProto\022\016\n\006FortI" +
+      "d\030\001 \002(\t\022\020\n\010unknown2\030\002 \002(\001\022\027\n\017ActivePokem" +
+      "onId\030\003 \002(\005\022\036\n\026LureExpiresTimestampMs\030\004 \002" +
+      "(\003\022\036\n\026DeployerPlayerCodename\030\005 \002(\t\032m\n\027Po" +
+      "kemonSummaryFortProto\022\025\n\rFortSummaryId\030\001",
+      " \002(\t\022\026\n\016LastModifiedMs\030\002 \002(\003\022\020\n\010Latitude" +
+      "\030\003 \002(\001\022\021\n\tLongitude\030\004 \002(\001\032<\n\025ClientSpawn" +
+      "PointProto\022\020\n\010Latitude\030\002 \002(\001\022\021\n\tLongitud" +
+      "e\030\003 \002(\001\032\203\002\n\020WildPokemonProto\022\023\n\013Encounte" +
+      "rId\030\001 \001(\004\022\026\n\016LastModifiedMs\030\002 \001(\003\022\020\n\010Lat" +
+      "itude\030\003 \001(\001\022\021\n\tLongitude\030\004 \001(\001\022\024\n\014SpawnP" +
+      "ointId\030\005 \001(\t\022C\n\007pokemon\030\007 \001(\01322.protobuf" +
+      ".ResponseEnvelop.WildPokemonProto.Pokemo" +
+      "n\022\030\n\020TimeTillHiddenMs\030\013 \001(\005\032(\n\007Pokemon\022\n" +
+      "\n\002Id\030\001 \001(\004\022\021\n\tPokemonId\030\002 \001(\005\032X\n\022NearbyP",
+      "okemonProto\022\025\n\rPokedexNumber\030\001 \001(\005\022\026\n\016Di" +
+      "stanceMeters\030\002 \001(\002\022\023\n\013EncounterId\030\003 \001(\004\032" +
+      "V\n\016ProfilePayload\022\020\n\010unknown1\030\001 \002(\005\0222\n\007p" +
+      "rofile\030\002 \001(\0132!.protobuf.ResponseEnvelop." +
+      "Profile\032\305\004\n\007Profile\022\025\n\rcreation_time\030\001 \002" +
+      "(\003\022\020\n\010username\030\002 \001(\t\022\014\n\004team\030\005 \001(\005\022\020\n\010tu" +
+      "torial\030\007 \001(\014\022?\n\006avatar\030\010 \001(\0132/.protobuf." +
+      "ResponseEnvelop.Profile.AvatarDetails\022\024\n" +
+      "\014poke_storage\030\t \001(\005\022\024\n\014item_storage\030\n \001(" +
+      "\005\022A\n\013daily_bonus\030\013 \001(\0132,.protobuf.Respon",
+      "seEnvelop.Profile.DailyBonus\022\021\n\tunknown1" +
+      "2\030\014 \001(\014\022\021\n\tunknown13\030\r \001(\014\022<\n\010currency\030\016" +
+      " \003(\0132*.protobuf.ResponseEnvelop.Profile." +
+      "Currency\032X\n\rAvatarDetails\022\020\n\010unknown2\030\002 " +
+      "\001(\005\022\020\n\010unknown3\030\003 \001(\005\022\020\n\010unknown9\030\t \001(\005\022" +
+      "\021\n\tunknown10\030\n \001(\005\032Y\n\nDailyBonus\022\036\n\026Next" +
+      "CollectTimestampMs\030\001 \001(\003\022+\n#NextDefender" +
+      "BonusCollectTimestampMs\030\002 \001(\003\032(\n\010Currenc" +
+      "y\022\014\n\004type\030\001 \002(\t\022\016\n\006amount\030\002 \001(\005B!\n\020pokem" +
+      "on.protobufB\rPokemonProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -26089,21 +27058,27 @@ public final class PokemonProtos {
     internal_static_protobuf_ResponseEnvelop_PokemonFortProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protobuf_ResponseEnvelop_PokemonFortProto_descriptor,
-        new java.lang.String[] { "FortId", "LastModifiedMs", "Latitude", "Longitude", "Team", "GuardPokemonId", "GuardPokemonLevel", "Enabled", "FortType", "GymPoints", "IsInBattle", "ActivePokemon", "CooldownCompleteMs", "Sponsor", "RenderingType", });
-    internal_static_protobuf_ResponseEnvelop_PokemonSummaryFortProto_descriptor =
+        new java.lang.String[] { "FortId", "LastModifiedMs", "Latitude", "Longitude", "Team", "GuardPokemonId", "GuardPokemonLevel", "Enabled", "FortType", "GymPoints", "IsInBattle", "ActivePortModifier", "LureInfo", "CooldownCompleteMs", "Sponsor", "RenderingType", });
+    internal_static_protobuf_ResponseEnvelop_FortLureInfoProto_descriptor =
       internal_static_protobuf_ResponseEnvelop_descriptor.getNestedTypes().get(6);
+    internal_static_protobuf_ResponseEnvelop_FortLureInfoProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_protobuf_ResponseEnvelop_FortLureInfoProto_descriptor,
+        new java.lang.String[] { "FortId", "Unknown2", "ActivePokemonId", "LureExpiresTimestampMs", "DeployerPlayerCodename", });
+    internal_static_protobuf_ResponseEnvelop_PokemonSummaryFortProto_descriptor =
+      internal_static_protobuf_ResponseEnvelop_descriptor.getNestedTypes().get(7);
     internal_static_protobuf_ResponseEnvelop_PokemonSummaryFortProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protobuf_ResponseEnvelop_PokemonSummaryFortProto_descriptor,
         new java.lang.String[] { "FortSummaryId", "LastModifiedMs", "Latitude", "Longitude", });
     internal_static_protobuf_ResponseEnvelop_ClientSpawnPointProto_descriptor =
-      internal_static_protobuf_ResponseEnvelop_descriptor.getNestedTypes().get(7);
+      internal_static_protobuf_ResponseEnvelop_descriptor.getNestedTypes().get(8);
     internal_static_protobuf_ResponseEnvelop_ClientSpawnPointProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protobuf_ResponseEnvelop_ClientSpawnPointProto_descriptor,
         new java.lang.String[] { "Latitude", "Longitude", });
     internal_static_protobuf_ResponseEnvelop_WildPokemonProto_descriptor =
-      internal_static_protobuf_ResponseEnvelop_descriptor.getNestedTypes().get(8);
+      internal_static_protobuf_ResponseEnvelop_descriptor.getNestedTypes().get(9);
     internal_static_protobuf_ResponseEnvelop_WildPokemonProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protobuf_ResponseEnvelop_WildPokemonProto_descriptor,
@@ -26115,19 +27090,19 @@ public final class PokemonProtos {
         internal_static_protobuf_ResponseEnvelop_WildPokemonProto_Pokemon_descriptor,
         new java.lang.String[] { "Id", "PokemonId", });
     internal_static_protobuf_ResponseEnvelop_NearbyPokemonProto_descriptor =
-      internal_static_protobuf_ResponseEnvelop_descriptor.getNestedTypes().get(9);
+      internal_static_protobuf_ResponseEnvelop_descriptor.getNestedTypes().get(10);
     internal_static_protobuf_ResponseEnvelop_NearbyPokemonProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protobuf_ResponseEnvelop_NearbyPokemonProto_descriptor,
         new java.lang.String[] { "PokedexNumber", "DistanceMeters", "EncounterId", });
     internal_static_protobuf_ResponseEnvelop_ProfilePayload_descriptor =
-      internal_static_protobuf_ResponseEnvelop_descriptor.getNestedTypes().get(10);
+      internal_static_protobuf_ResponseEnvelop_descriptor.getNestedTypes().get(11);
     internal_static_protobuf_ResponseEnvelop_ProfilePayload_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protobuf_ResponseEnvelop_ProfilePayload_descriptor,
         new java.lang.String[] { "Unknown1", "Profile", });
     internal_static_protobuf_ResponseEnvelop_Profile_descriptor =
-      internal_static_protobuf_ResponseEnvelop_descriptor.getNestedTypes().get(11);
+      internal_static_protobuf_ResponseEnvelop_descriptor.getNestedTypes().get(12);
     internal_static_protobuf_ResponseEnvelop_Profile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protobuf_ResponseEnvelop_Profile_descriptor,
