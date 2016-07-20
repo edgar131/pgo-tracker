@@ -227,8 +227,8 @@ public class Service {
         params.add(new BasicNameValuePair("lt", lt));
         params.add(new BasicNameValuePair("execution", execution));
         params.add(new BasicNameValuePair("_eventId", "submit"));
-        params.add(new BasicNameValuePair("username", "AshMagus"));
-        params.add(new BasicNameValuePair("password", "AaBbCcDd12345"));
+        params.add(new BasicNameValuePair("username", "USERNAME"));
+        params.add(new BasicNameValuePair("password", "PASSWORD"));
         post.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
         HttpResponse loginResponse = httpClient.execute(post);
         String location = loginResponse.getFirstHeader("Location").getValue();
