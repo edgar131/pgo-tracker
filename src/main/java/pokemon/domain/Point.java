@@ -44,9 +44,6 @@ public class Point {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("latitude", latitude)
-                .add("longitude", longitude)
-                .toString();
+        return latitude + "," + longitude;
     }
 }

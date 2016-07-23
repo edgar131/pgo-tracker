@@ -3,6 +3,7 @@ package pokemon.resource;
 import com.pokegoapi.api.map.pokemon.CatchablePokemon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pokemon.Util.CatchablePokemonToPokemonLocationConverter;
 import pokemon.Util.LocationUtil;
 import pokemon.domain.Point;
 import pokemon.domain.Quadrant;
@@ -12,6 +13,8 @@ import pokemon.service.Service;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,25 +32,20 @@ public class Resource {
 
     @GET
     @Produces("application/json")
-    public Set<PokemonLocation> output() {
+    public Set<PokemonLocation> output(@QueryParam("lat") Double latitude, @QueryParam("lon") Double longitude) {
         if(!service.hasPokemonGo()){
             service.login();
         }
         Set<PokemonLocation> pokemonLocations = new HashSet<>();
         try {
-            Point basePoint = new Point(39.089702, -77.047756);
+            Point basePoint = new Point(latitude, longitude);
             Set<CatchablePokemon> pokemons = service.getPokemon(basePoint);
-            for(CatchablePokemon pokemon: pokemons){
-                Point pokemonPoint = new Point(pokemon.getLatitude(), pokemon.getLongitude());
-                PokemonLocation pokemonLocation = new PokemonLocation();
-                pokemonLocation.setName(pokemon.getPokemonId().name());
-                pokemonLocation.setPoint(pokemonPoint);
-                pokemonLocation.setDirection(LocationUtil.getDirection(basePoint, pokemonPoint));
-                pokemonLocation.setExpirationTimestamp(pokemon.getExpirationTimestampMs());
-                pokemonLocation.setMetersAway(LocationUtil.getDistance(basePoint, pokemonPoint));
-                pokemonLocations.add(pokemonLocation);
-            }
+            pokemonLocations = CatchablePokemonToPokemonLocationConverter.apply(pokemons, basePoint);
+            /*for(PokemonLocation pokemonLocation: pokemonLocations){
+                System.out.println(pokemonLocation.getPoint().toString());
+            }*/
             System.out.println("Number of Pokemon: " + pokemonLocations.size());
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,0 +1,1 @@
+java -jar pokemon-0.0.1-SNAPSHOT.jar --userName=USERNAME --password=PASSWORD

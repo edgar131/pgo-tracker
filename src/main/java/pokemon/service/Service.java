@@ -11,12 +11,21 @@ import com.pokegoapi.auth.PtcLogin;
 import com.pokegoapi.exceptions.LoginFailedException;
 import com.pokegoapi.exceptions.RemoteServerException;
 import okhttp3.OkHttpClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import pokemon.domain.Point;
 import pokemon.domain.Quadrant;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import static POGOProtos.Networking.Envelopes.RequestEnvelopeOuterClass.RequestEnvelope.AuthInfo;
 import static POGOProtos.Map.Pokemon.WildPokemonOuterClass.WildPokemon;
@@ -31,10 +40,10 @@ public class Service {
     private String userName;
     private String password;
 
-    public Service(){
-        this.userName = "USERNAME";
-        this.password = "PASSWORD";
-
+    @Autowired
+    public Service(@Value("${userName}") String userName, @Value("${password}") String password){
+        this.userName = userName;
+        this.password = password;
     }
 
     public void login(){
@@ -52,16 +61,25 @@ public class Service {
 
     public Set<CatchablePokemon> getPokemon(Point basePoint) throws Exception{
         Set<Point> points = getAllPoints(basePoint);
-        Set<CatchablePokemon> pokemons = new HashSet<>();
+        Set<CatchablePokemon> pokemons = Sets.newConcurrentHashSet();
+
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
         for(Point point: points){
-            pokemons.addAll(getCatchablePokemonAtPoint(point));
+            Runnable worker = new MapWorker(this, point, pokemons);
+            executorService.execute(worker);
         }
+        executorService.shutdown();
+        executorService.awaitTermination(30, TimeUnit.SECONDS);
         return pokemons;
     }
 
-    private Set<CatchablePokemon> getCatchablePokemonAtPoint(Point point) throws Exception{
+    Set<CatchablePokemon> getCatchablePokemonAtPoint(Point point) throws Exception{
         pokemonGo.setLocation(point.getLatitude(), point.getLongitude(), ALTITUDE);
-        return new HashSet<CatchablePokemon>(pokemonGo.getMap().getCatchablePokemon());
+        Set<CatchablePokemon> pokemons = Sets.newConcurrentHashSet();
+        for(CatchablePokemon pokemon: pokemonGo.getMap().getCatchablePokemon()){
+            pokemons.add(pokemon);
+        }
+        return pokemons;
     }
 
     private Set<Point> getAllPoints(Point basePoint){

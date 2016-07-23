@@ -9,8 +9,4 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringApplicationConfiguration(classes = PokemonApplication.class)
 public class PokemonApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
-
 }
