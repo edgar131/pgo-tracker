@@ -2,7 +2,6 @@ package pokemon.dto;
 
 import com.google.common.base.Objects;
 import pokemon.domain.Point;
-import pokemon.domain.Quadrant;
 
 public class PokemonLocation {
     private String name;

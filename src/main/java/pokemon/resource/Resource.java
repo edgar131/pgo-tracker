@@ -4,9 +4,7 @@ import com.pokegoapi.api.map.pokemon.CatchablePokemon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pokemon.Util.CatchablePokemonToPokemonLocationConverter;
-import pokemon.Util.LocationUtil;
 import pokemon.domain.Point;
-import pokemon.domain.Quadrant;
 import pokemon.dto.PokemonLocation;
 import pokemon.service.Service;
 
@@ -14,7 +12,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
