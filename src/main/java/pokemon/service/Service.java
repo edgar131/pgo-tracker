@@ -32,8 +32,8 @@ public class Service {
     private String password;
 
     public Service(){
-        this.userName = "AshMagus";
-        this.password = "AaBbCcDd12345";
+        this.userName = "USERNAME";
+        this.password = "PASSWORD";
 
     }
 
