@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>com.github.Grover-c13</groupId>
 			<artifactId>PokeGOAPI-Java</artifactId>
-			<version>93834bb</version>
+			<version>master-076354361d-1</version>
 		</dependency>
 	</dependencies>
 

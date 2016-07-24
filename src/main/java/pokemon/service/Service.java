@@ -5,6 +5,7 @@ import com.pokegoapi.api.PokemonGo;
 import com.pokegoapi.api.map.pokemon.CatchablePokemon;
 import com.pokegoapi.auth.PtcLogin;
 import com.pokegoapi.exceptions.LoginFailedException;
+import com.pokegoapi.exceptions.RemoteServerException;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,6 +46,8 @@ public class Service {
                 this.pokemonGo = new PokemonGo(authInfo, client);
             }
         } catch (LoginFailedException e) {
+            e.printStackTrace();
+        } catch (RemoteServerException e) {
             e.printStackTrace();
         }
     }
