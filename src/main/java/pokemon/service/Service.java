@@ -10,8 +10,10 @@ import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import pokemon.Util.CatchablePokemonToPokemonLocationConverter;
 import pokemon.domain.Point;
 import pokemon.domain.Quadrant;
+import pokemon.dto.PokemonLocation;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,22 +39,29 @@ public class Service {
         this.password = password;
     }
 
-    public void login(){
+    public AuthInfo login(){
         OkHttpClient client = new OkHttpClient();
         PtcLogin ptcLogin = new PtcLogin(client);
+        AuthInfo authInfo = null;
         try {
-            AuthInfo authInfo = ptcLogin.login(userName, password);
+            authInfo = ptcLogin.login(userName, password);
             if(authInfo.hasToken()){
                 this.pokemonGo = new PokemonGo(authInfo, client);
             }
         } catch (LoginFailedException e) {
-            e.printStackTrace();
+            System.out.println("Login Failed (Check userName/Password)");
         } catch (RemoteServerException e) {
-            e.printStackTrace();
+            System.out.println("Login Failed (PTC Server may be down)");
         }
+        return authInfo;
     }
 
-    public Set<CatchablePokemon> getPokemon(Point basePoint) throws Exception{
+    public void beginProcess(Set<PokemonLocation> pokemons, Point basePoint) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(new HeartbeatWorker(pokemons, this, basePoint));
+    }
+
+    Set<PokemonLocation> heartbeat(Point basePoint) throws Exception{
         Set<Point> points = getAllPoints(basePoint);
         Set<CatchablePokemon> pokemons = Sets.newConcurrentHashSet();
 
@@ -63,7 +72,8 @@ public class Service {
         }
         executorService.shutdown();
         executorService.awaitTermination(30, TimeUnit.SECONDS);
-        return pokemons;
+        Set<PokemonLocation> pokemonLocations = CatchablePokemonToPokemonLocationConverter.apply(pokemons, basePoint);
+        return pokemonLocations;
     }
 
     Set<CatchablePokemon> getCatchablePokemonAtPoint(Point point) throws Exception{
@@ -103,7 +113,4 @@ public class Service {
         return points;
     }
 
-    public boolean hasPokemonGo(){
-        return pokemonGo != null;
-    }
 }

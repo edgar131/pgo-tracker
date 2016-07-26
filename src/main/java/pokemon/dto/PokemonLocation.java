@@ -3,28 +3,30 @@ package pokemon.dto;
 import com.google.common.base.Objects;
 import pokemon.domain.Point;
 
+import java.util.Date;
+
 public class PokemonLocation {
-    private String name;
-    private Long expirationTimestamp;
+    private PokemonId pokemonId;
+    private Date expirationTimestamp;
     private Point point;
     private String direction;
     private Double metersAway;
 
     public PokemonLocation() {}
 
-    public String getName() {
-        return name;
+    public PokemonId getPokemonId() {
+        return pokemonId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPokemonId(PokemonId id) {
+        this.pokemonId = id;
     }
 
-    public Long getExpirationTimestamp() {
+    public Date getExpirationTimestamp() {
         return expirationTimestamp;
     }
 
-    public void setExpirationTimestamp(Long expirationTimestamp) {
+    public void setExpirationTimestamp(Date expirationTimestamp) {
         this.expirationTimestamp = expirationTimestamp;
     }
 
@@ -57,12 +59,12 @@ public class PokemonLocation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PokemonLocation that = (PokemonLocation) o;
-        return Objects.equal(name, that.name) &&
+        return Objects.equal(pokemonId, that.pokemonId) &&
                 Objects.equal(point, that.point);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(name, point);
+        return Objects.hashCode(pokemonId, point);
     }
 }

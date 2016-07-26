@@ -1,7 +1,9 @@
 package pokemon.resource;
 
-import POGOProtos.Map.Pokemon.MapPokemonOuterClass;
+import POGOProtos.Networking.Envelopes.RequestEnvelopeOuterClass;
+import com.google.common.collect.Sets;
 import com.pokegoapi.api.map.pokemon.CatchablePokemon;
+import com.pokegoapi.exceptions.RemoteServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,19 +13,24 @@ import pokemon.domain.Point;
 import pokemon.dto.PokemonLocation;
 import pokemon.service.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-
+import static POGOProtos.Networking.Envelopes.RequestEnvelopeOuterClass.RequestEnvelope.AuthInfo;
 @Component
 @Path("/")
 public class Resource {
 
+    private static final String AUTH = "AUTH";
+    private static final String POKEMON = "POKEMON";
     private Service service;
 
     @Autowired
@@ -36,26 +43,21 @@ public class Resource {
     @RequestMapping
     @Produces("application/json")
     public Set<PokemonLocation> output(@QueryParam("lat") Double latitude,
-                                       @QueryParam("lon") Double longitude) {
-        if(!service.hasPokemonGo()){
-            service.login();
-        }
-        Set<PokemonLocation> pokemonLocations = new HashSet<>();
-        try {
-            Point basePoint = new Point(latitude, longitude);
-            Date startTime = new Date();
-            Set<CatchablePokemon> pokemons = service.getPokemon(basePoint);
-            Date endTime = new Date();
-            pokemonLocations = CatchablePokemonToPokemonLocationConverter.apply(pokemons, basePoint);
-            System.out.println("Retrieved: " + pokemonLocations.size() + " Pokemon in " + ((endTime.getTime()-startTime.getTime())/1000) + " seconds");
-            for(PokemonLocation pokemonLocation: pokemonLocations){
-                System.out.println(pokemonLocation.getPoint().toString());
+                                       @QueryParam("lon") Double longitude,
+                                       @Context HttpServletRequest request) {
+        HttpSession session = request.getSession(true);
+        AuthInfo authInfo = (AuthInfo)session.getAttribute(AUTH);
+        if(authInfo == null || !authInfo.hasToken()){
+            authInfo = service.login();
+            session.setAttribute(AUTH, authInfo);
+            if(authInfo != null && authInfo.hasToken()){
+                Set<PokemonLocation> pokemons = Sets.newConcurrentHashSet();
+                session.setAttribute(POKEMON, pokemons);
+                service.beginProcess(pokemons, new Point(latitude, longitude));
             }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            return (Set<PokemonLocation>)session.getAttribute(POKEMON);
         }
-        return pokemonLocations;
+        return null;
     }
 }
