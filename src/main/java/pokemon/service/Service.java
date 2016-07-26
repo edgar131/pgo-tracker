@@ -69,8 +69,14 @@ public class Service {
     Set<CatchablePokemon> getCatchablePokemonAtPoint(Point point) throws Exception{
         pokemonGo.setLocation(point.getLatitude(), point.getLongitude(), ALTITUDE);
         Set<CatchablePokemon> pokemons = Sets.newConcurrentHashSet();
-        for(CatchablePokemon pokemon: pokemonGo.getMap().getCatchablePokemon()){
-            pokemons.add(pokemon);
+        Object[] pokemonArray = null;
+        synchronized(this) {
+            pokemonArray = pokemonGo.getMap().getCatchablePokemon().toArray();
+        }
+        if(pokemonArray != null && pokemonArray.length > 0){
+            for(Object pokemon: pokemonArray){
+                pokemons.add((CatchablePokemon)pokemon);
+            }
         }
         return pokemons;
     }
